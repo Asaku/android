@@ -11,7 +11,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class ConfigActivity extends AppCompatActivity {
 
@@ -59,11 +67,32 @@ public class ConfigActivity extends AppCompatActivity {
         editor.apply();
         editor.commit();
 
-        /*
-        Map<String, ?> allEntries = sharedPreferences.getAll();
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            Log.i("yolo", entry.getKey() + ": " + entry.getValue().toString());
+        OpenHttpConnection connection = (OpenHttpConnection) new OpenHttpConnection().execute("http://www.joueurdugrenier.fr/feed/");
+        try {
+            InputStream is = connection.get();
+
+            readStream(is);
+            Log.i("yolo", "hihou" + is.toString());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        */
+    }
+
+    private String readStream(InputStream is) {
+        try {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            int i = is.read();
+            while(i != -1) {
+                bo.write(i);
+                Log.i("yolo", "cha marche");
+                i = is.read();
+                Log.i("yolo", "result: " + bo.toString());
+            }
+            return bo.toString();
+        } catch (IOException e) {
+            return "";
+        }
     }
 }
