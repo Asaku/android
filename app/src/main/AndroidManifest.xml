@@ -30,11 +30,7 @@
             android:name=".ConfigActivity"
             android:label="@string/title_activity_config"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             </activity>
         <activity
             android:name=".VideoActivity"
@@ -46,6 +42,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CalcuActivity" />
         <activity android:name=".WifiActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".FullscreenActivity"

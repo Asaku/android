@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,8 +27,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class WifiActivity extends AppCompatActivity {
-
+public class WifiActivity extends AppCompatActivity
+{
     TextView mainText;
     WifiManager mainWifi;
     WifiReceiver receiverWifi;
@@ -33,7 +36,8 @@ public class WifiActivity extends AppCompatActivity {
     StringBuilder sb = new StringBuilder();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi);
 
@@ -45,11 +49,13 @@ public class WifiActivity extends AppCompatActivity {
         // Check for wifi is disabled
         if (!mainWifi.isWifiEnabled())
         {
-            // If wifi disabled then enable it
             Toast.makeText(getApplicationContext(), "wifi is disabled..making it enabled", Toast.LENGTH_LONG).show();
 
+            // If wifi disabled then enable it
             mainWifi.setWifiEnabled(true);
         }
+
+        Log.i("yolo", "hellloooo");
 
         // wifi scaned value broadcast receiver
         receiverWifi = new WifiReceiver();
@@ -58,27 +64,32 @@ public class WifiActivity extends AppCompatActivity {
         // Broacast receiver will automatically call when number of wifi connections changed
         registerReceiver(receiverWifi, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         mainWifi.startScan();
-
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         menu.add(0, 0, 0, "Refresh");
         return super.onCreateOptionsMenu(menu);
     }
 
-    protected void onPause() {
+    protected void onPause()
+    {
         unregisterReceiver(receiverWifi);
         super.onPause();
     }
 
-    protected void onResume() {
+    protected void onResume()
+    {
         registerReceiver(receiverWifi, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         super.onResume();
     }
 
-    public void connectTo() {
+    public void connectTo(String ssid)
+    {
+
+        //Log.i("yolo", ssid);
         WifiConfiguration wifiConfig = new WifiConfiguration();
-        wifiConfig.SSID = String.format("\"%s\"", "wifi_name");
+        wifiConfig.SSID = String.format("\"%s\"", ssid);
         wifiConfig.preSharedKey = String.format("\"%s\"", "password");
 
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -92,21 +103,40 @@ public class WifiActivity extends AppCompatActivity {
     // Broadcast receiver class called its receive method
     // when number of wifi connections changed
 
-    class WifiReceiver extends BroadcastReceiver {
-
+    class WifiReceiver extends BroadcastReceiver
+    {
         // This method call when number of wifi connections changed
-        public void onReceive(Context c, Intent intent) {
+        public void onReceive(Context c, Intent intent)
+        {
+            WifiManager manager = (WifiManager) c.getSystemService(Context.WIFI_SERVICE);
 
+            if (manager.isWifiEnabled()) {
+                Log.i("yolo", "etape 1");
+                WifiInfo wifiInfo = manager.getConnectionInfo();
+                if (wifiInfo != null) {
+                    Log.i("yolo", "etape 2");
+                    NetworkInfo.DetailedState state = WifiInfo.getDetailedStateOf(wifiInfo.getSupplicantState());
+                    if (state == NetworkInfo.DetailedState.CONNECTED || state == NetworkInfo.DetailedState.OBTAINING_IPADDR) {
+                        wifiInfo.getSSID();
+                        Log.i("yolo", "ssid connecté: " + wifiInfo.getSSID());
+                    }
+                }
+            }
+
+            Log.i("yolo", "fin");
             sb = new StringBuilder();
             wifiList = mainWifi.getScanResults();
-            sb.append("\n        Number Of Wifi connections :"+wifiList.size()+"\n\n");
+            sb.append("\n Number Of Wifi connections :"+wifiList.size()+"\n\n");
 
             for(int i = 0; i < wifiList.size(); i++){
 
                 sb.append(new Integer(i+1).toString() + ". ");
                 sb.append((wifiList.get(i)).toString());
                 String beforeFirstDot = (wifiList.get(i)).toString().split("\\,")[0];
-                Log.i("yolo", beforeFirstDot.replace("SSID", "").replace(":", "").trim());
+                //Log.i("yolo", beforeFirstDot.replace("SSID", "").replace(":", "").trim());
+
+                connectTo(beforeFirstDot.replace("SSID", "").replace(":", "").trim());
+
                 sb.append("\n\n");
             }
 
