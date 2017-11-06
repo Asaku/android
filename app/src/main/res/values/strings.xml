@@ -9,4 +9,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="title_activity_contact">ContactActivity</string>
+    <string name="contact">Contact</string>
+    <string name="game">Jeux</string>
+    <string name="home">Accueil</string>
 </resources>

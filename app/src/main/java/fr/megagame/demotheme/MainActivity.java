@@ -1,5 +1,6 @@
 package fr.megagame.demotheme;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.hey:
-                Toast.makeText(this, "Hey cha va?", Toast.LENGTH_LONG).show();
+            case R.id.home:
                 return true;
-            case R.id.hola:
-                Toast.makeText(this, "Hola", Toast.LENGTH_LONG).show();
+            case R.id.game:
+                Intent intent = new Intent(this, GameActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

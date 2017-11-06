@@ -2,11 +2,13 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group />
     <item
-        android:id="@+id/hey"
-        android:title="hey" />
+        android:id="@+id/home"
+        android:title="@string/home" />
     <item
-        android:id="@+id/hola"
-        android:title="hola" />
+        android:id="@+id/contact"
+        android:title="@string/contact" />
+    <item
+        android:id="@+id/game"
+        android:title="@string/game" />
 </menu>
