@@ -36,7 +36,6 @@ public class ConfigActivity extends AppCompatActivity {
         String name = sharedPreferences.getString("user_name", "");
         String email = sharedPreferences.getString("user_email", "");
         String birthDate = sharedPreferences.getString("user_birthdate", "");
-        //Log.i("yolo", "mavulue: " + email);
 
         userName.setText(name);
         userEmail.setText(email);
