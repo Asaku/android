@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DemoTheme</string>
+    <string name="game">Jeux</string>
+    <string name="home">Accueil</string>
+    <string name="welcome">Bienvenue</string>
+</resources>

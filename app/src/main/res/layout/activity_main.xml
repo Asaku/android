@@ -20,8 +20,28 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="108dp"
             android:lineSpacingExtra="10sp"
-            android:text="Bienvenue"
+            android:text="@string/welcome"
             android:textColor="@android:color/holo_red_light"
             android:textSize="36sp" />
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="fr.megagame.demotheme.BlankFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="54dp"
+            tools:layout="@layout/fragment_blank" />
+
+        <Button
+            android:id="@+id/btnBrowser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fragment"
+            android:layout_alignStart="@+id/fragment"
+            android:layout_below="@+id/fragment"
+            android:layout_marginTop="91dp"
+            android:text="Navigateur" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

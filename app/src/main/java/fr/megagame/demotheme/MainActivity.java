@@ -1,18 +1,47 @@
 package fr.megagame.demotheme;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends SubActivity {
+
+    private Button btnBrowser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnBrowser = (Button) findViewById(R.id.btnBrowser);
+
+        btnBrowser.setOnClickListener(btnAction);
     }
+
+
+    /**
+     * Lance une application externe
+     * exemple avec le navigateur par défaut
+     */
+    private View.OnClickListener btnAction = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            boolean flag = true;
+            Intent intent = new Intent();
+
+            if (flag) {
+                intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_APP_BROWSER);
+            } else {
+                Uri url = Uri.parse("http://www.aston-ecole.com/");
+                intent = new Intent(Intent.ACTION_VIEW, url);
+            }
+
+            startActivity(intent);
+        }
+    };
 }
