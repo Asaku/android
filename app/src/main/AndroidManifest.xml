@@ -48,12 +48,10 @@
         <activity
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:label="@string/title_activity_fullscreen"></activity>
         <activity
             android:name=".GameActivity"
-            android:label="@string/title_activity_game"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_game"></activity>
         <activity
             android:name=".ContactActivity"
             android:label="@string/title_activity_contact"
