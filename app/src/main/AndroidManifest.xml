@@ -34,7 +34,7 @@
         <activity
             android:name=".ConfigActivity"
             android:label="@string/title_activity_config"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VideoActivity"
             android:label="@string/title_activity_video"
@@ -44,17 +44,21 @@
             android:label="@string/title_activity_todo"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CalcuActivity" />
-        <activity android:name=".WifiActivity"></activity>
+        <activity android:name=".WifiActivity" />
         <activity
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"></activity>
+            android:label="@string/title_activity_fullscreen" />
         <activity
             android:name=".GameActivity"
-            android:label="@string/title_activity_game"></activity>
+            android:label="@string/title_activity_game" />
         <activity
             android:name=".ContactActivity"
             android:label="@string/title_activity_contact"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CallRestApi"
+            android:label="@string/title_activity_call_rest_api"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

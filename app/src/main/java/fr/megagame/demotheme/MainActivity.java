@@ -3,6 +3,7 @@ package fr.megagame.demotheme;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,7 @@ public class MainActivity extends SubActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.i("yolo", "cha main acti");
         btnBrowser = (Button) findViewById(R.id.btnBrowser);
 
         btnBrowser.setOnClickListener(btnAction);

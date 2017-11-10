@@ -18,6 +18,7 @@ public class SubActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.i("yolo", "Menu");
         Intent intent = new Intent(this, MainActivity.class);
         switch(item.getItemId()) {
             case R.id.home:
@@ -25,6 +26,10 @@ public class SubActivity extends AppCompatActivity {
                 return true;
             case R.id.game:
                 intent = new Intent(this, GameActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.rest_api:
+                intent = new Intent(this, CallRestApi.class);
                 startActivity(intent);
                 return true;
             default:

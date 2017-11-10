@@ -65,33 +65,5 @@ public class ConfigActivity extends AppCompatActivity {
 
         editor.apply();
         editor.commit();
-
-        OpenHttpConnection connection = (OpenHttpConnection) new OpenHttpConnection().execute("http://www.joueurdugrenier.fr/feed/");
-        try {
-            InputStream is = connection.get();
-
-            readStream(is);
-            Log.i("yolo", "hihou" + is.toString());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String readStream(InputStream is) {
-        try {
-            ByteArrayOutputStream bo = new ByteArrayOutputStream();
-            int i = is.read();
-            while(i != -1) {
-                bo.write(i);
-                Log.i("yolo", "cha marche");
-                i = is.read();
-                Log.i("yolo", "result: " + bo.toString());
-            }
-            return bo.toString();
-        } catch (IOException e) {
-            return "";
-        }
     }
 }

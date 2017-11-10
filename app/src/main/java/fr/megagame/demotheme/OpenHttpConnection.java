@@ -2,6 +2,7 @@ package fr.megagame.demotheme;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -9,11 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-/**
- * Created by mehdi on 03/08/2017.
- */
 
-public class OpenHttpConnection extends AsyncTask<String, Void, InputStream> {
+class OpenHttpConnection extends AsyncTask<String, Void, InputStream> {
 
     @Override
     protected InputStream doInBackground(String... params) {
@@ -51,9 +49,9 @@ public class OpenHttpConnection extends AsyncTask<String, Void, InputStream> {
             Log.i("yolo", "etape 3");
             HttpURLConnection httpConn = (HttpURLConnection) conn;
             assert httpConn != null;
-            //httpConn.setAllowUserInteraction(false);
-            //httpConn.setInstanceFollowRedirects(true);
-            //httpConn.setRequestMethod("Get");
+            httpConn.setAllowUserInteraction(false);
+            httpConn.setInstanceFollowRedirects(true);
+            httpConn.setRequestMethod("Get");
             Log.i("yolo", "looool");
             httpConn.connect();
             Log.i("yolo", "etape 4");
@@ -75,6 +73,22 @@ public class OpenHttpConnection extends AsyncTask<String, Void, InputStream> {
         Log.i("yolo", "end");
         return in;
 
+    }
+
+    static String readStream(InputStream is) {
+        try {
+            ByteArrayOutputStream bo = new ByteArrayOutputStream();
+            int i = is.read();
+            while(i != -1) {
+                bo.write(i);
+                Log.i("yolo", "cha marche");
+                i = is.read();
+                Log.i("yolo", "result: " + bo.toString());
+            }
+            return bo.toString();
+        } catch (IOException e) {
+            return "";
+        }
     }
 
 }

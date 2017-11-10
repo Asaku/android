@@ -11,4 +11,7 @@
     <item
         android:id="@+id/game"
         android:title="@string/game" />
+    <item
+        android:id="@+id/rest_api"
+        android:title="Rest Api" />
 </menu>
