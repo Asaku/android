@@ -18,7 +18,6 @@ public class SubActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.i("yolo", "Menu");
         Intent intent = new Intent(this, MainActivity.class);
         switch(item.getItemId()) {
             case R.id.home:
