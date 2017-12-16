@@ -3,12 +3,15 @@ package fr.megagame.demotheme;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends SubActivity {
 
     private Button btnBrowser;
+
+    final String TAG = "main_activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +20,7 @@ public class MainActivity extends SubActivity {
         btnBrowser = (Button) findViewById(R.id.btnBrowser);
 
         btnBrowser.setOnClickListener(btnAction);
+        Log.i(TAG, "name activity de ouf 2");
     }
 
 
